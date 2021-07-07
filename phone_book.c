@@ -243,9 +243,11 @@ int delete(FILE *db_file, char *name) {
 int search(FILE *db_file ,char *name){
          int find_result=0;
          char temp[512];
+         entry *p = load_entries(db_file);
+         entry *base=p;
          while(fgets(temp,512,db_file) != NULL){
                     if((strstr(temp,name))!=NULL){
-                             printf("%d",entry.phone);
+                             printf("%d",p->phone);
                              find_result++;
                           }
                        
@@ -254,4 +256,5 @@ int search(FILE *db_file ,char *name){
                       find_result=-1;
                      }
              return find_result;
+             free_entries(base);
     }
