@@ -69,8 +69,8 @@ int main(int argc, char *argv[]) {
              FILE *fp = open_db_file();
               char *name = argv[2];
             int result = search(fp,name);
-                 if (!result) {
-                        printf("no match\n");
+                 if (result==-1) {
+                        printf("No Match\n");
                         fclose(fp);
                          exit(1);
                  }
@@ -107,8 +107,7 @@ FILE *open_db_file() {
 }
   
 void free_entries(entry *p) {
-  /* TBD */ free(p);
-  printf("All heap blocks were freed -- no leaks are possible\n"); 
+  /* TBD */ free(p); 
   } 
   
 
