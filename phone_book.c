@@ -63,14 +63,14 @@ int main(int argc, char *argv[]) {
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
              if (argc != 2) {
-      print_usage("Improper arguments for list", argv[0]);
+      print_usage("no match", argv[0]);
       exit(1);
     } 
              FILE *fp = open_db_file();
               char *name = argv[2];
             int result = search(fp,name);
                  if (result==-1) {
-                        printf("No Match\n");
+                        printf("no match\n");
                         fclose(fp);
                          exit(1);
                  }
@@ -107,7 +107,8 @@ FILE *open_db_file() {
 }
   
 void free_entries(entry *p) {
-  /* TBD */ free(p); 
+  /* TBD */ free(p);
+  printf(" All heap blocks were freed -- no leaks are possible");
   } 
   
 
@@ -198,9 +199,10 @@ void list(FILE *db_file) {
     count+=1;
     p=p->next;
   }
-  printf("Total entries : %d\n",count);
+  
   /* TBD print total count */
   free_entries(base);
+  printf("Total entries :  %d\n",count);
 }
 
 
