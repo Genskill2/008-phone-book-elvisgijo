@@ -62,7 +62,15 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
-    printf("%d",argv[3]); /* TBD  */
+             FILE *fp =open_db_file();
+              char *name = argv[2];
+            int result = search(fp,name);
+             fclose(fp);
+             exit(0);
+                 if(result==-1){
+                         printf("Match not found\n");
+                         exit(1);
+                 }/* TBD  */
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
     if (argc != 3) {
       print_usage("Improper arguments for delete", argv[0]);
@@ -184,7 +192,7 @@ void list(FILE *db_file) {
     printf("%-20s : %10s\n", p->name, p->phone);
     count+=1;
     p=p->next;
-    
+    exit(1);
   }
   printf("Total entries : %d\n",count);
   /* TBD print total count */
@@ -205,10 +213,12 @@ int delete(FILE *db_file, char *name) {
           prev->next = del->next;
           free(del);
           deleted++;
+          exit(1);
          }
       if(prev->next==NULL){
            base = prev->next;
            free(prev);
+           exit(1);
           }
                
       /* Matching node found. Delete it from the linked list.
@@ -229,3 +239,19 @@ int delete(FILE *db_file, char *name) {
   free_entries(base);
   return deleted;
 }
+
+int search(FILE *db_file ,char *name){
+         int find_result=0;
+         char temp[512];
+         while(fgets(temp,512,db_file) != NULL){
+                    if((strstr(temp,name))!=NULL){
+                             printf("%d",entry.phone);
+                             find_result++;
+                          }
+                       
+                    }
+                if(find_result==0){
+                      find_result=-1;
+                     }
+             return find_result;
+    }
