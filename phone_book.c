@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
                          exit(1);
                  }
                    fclose(fp);
-             exit(0); }
+             exit(0); 
               /* TBD  */
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
     if (argc != 3) {
