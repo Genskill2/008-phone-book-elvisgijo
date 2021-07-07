@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
              if (argc != 2) {
-           printf("Couldn't open database file: No such file or directory/n");
+           printf("Couldn't open database file: No such file or directory");
              exit(1);
            }
          FILE *fp = open_db_file();
@@ -202,7 +202,8 @@ void list(FILE *db_file) {
   if(count!=0){
         printf("Total entries :  %d",count);
         free(base);
-        exit(0);
+        free(p);
+        
      }
    else {
   /* TBD print total count */
@@ -263,6 +264,7 @@ int search(FILE *db_file ,char *name){
                     if((strstr(temp,name))!=NULL){
                              printf("%s",p->phone);
                              find_result++;
+                             
                           }
                        
                     }
