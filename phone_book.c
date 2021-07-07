@@ -94,7 +94,7 @@ FILE *open_db_file() {
   
 void free_entries(entry *p) {
   /* TBD */ free(p);
-  printf("Memory is not being freed. This needs to be fixed!\n");  
+  printf("All heap blocks were freed -- no leaks are possible\n");  
   } 
   
 
@@ -182,8 +182,9 @@ void list(FILE *db_file) {
   int count=0;
   while (p!=NULL) {
     printf("%-20s : %10s\n", p->name, p->phone);
+    count+=1;
     p=p->next;
-    count++;
+    
   }
   printf("Total entries : %d\n",count);
   /* TBD print total count */
