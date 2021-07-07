@@ -62,15 +62,21 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
-             FILE *fp =open_db_file();
+             if (argc != 2) {
+      print_usage("Improper arguments for list", argv[0]);
+      exit(1);
+    } 
+             FILE *fp = open_db_file();
               char *name = argv[2];
             int result = search(fp,name);
-             fclose(fp);
-             exit(0);
-                 if(result==-1){
-                         printf("Match not found\n");
+                 if (!result) {
+                        printf("no match\n");
+                        fclose(fp);
                          exit(1);
-                 }/* TBD  */
+                 }
+                   fclose(fp);
+             exit(0); }
+              /* TBD  */
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
     if (argc != 3) {
       print_usage("Improper arguments for delete", argv[0]);
@@ -102,7 +108,7 @@ FILE *open_db_file() {
   
 void free_entries(entry *p) {
   /* TBD */ free(p);
-  printf("All heap blocks were freed -- no leaks are possible\n");  
+  printf("All heap blocks were freed -- no leaks are possible\n"); 
   } 
   
 
@@ -192,7 +198,6 @@ void list(FILE *db_file) {
     printf("%-20s : %10s\n", p->name, p->phone);
     count+=1;
     p=p->next;
-    exit(1);
   }
   printf("Total entries : %d\n",count);
   /* TBD print total count */
@@ -213,12 +218,10 @@ int delete(FILE *db_file, char *name) {
           prev->next = del->next;
           free(del);
           deleted++;
-          exit(1);
          }
       if(prev->next==NULL){
            base = prev->next;
            free(prev);
-           exit(1);
           }
                
       /* Matching node found. Delete it from the linked list.
@@ -247,13 +250,13 @@ int search(FILE *db_file ,char *name){
          entry *base=p;
          while(fgets(temp,512,db_file) != NULL){
                     if((strstr(temp,name))!=NULL){
-                             printf("%d",p->phone);
+                             printf("%s",p->phone);
                              find_result++;
                           }
                        
                     }
                 if(find_result==0){
-                      find_result=-1;
+                     return -1;
                      }
              return find_result;
              free_entries(base);
