@@ -93,10 +93,7 @@ FILE *open_db_file() {
 }
   
 void free_entries(entry *p) {
-  /* TBD */if(free(p)){
-       printf("Memory is freed");
-  }
-  else {
+  /* TBD */ free(p);
   printf("Memory is not being freed. This needs to be fixed!\n");  
   }
 }  
@@ -209,10 +206,10 @@ int delete(FILE *db_file, char *name) {
           free(del);
           deleted++;
          }
-      if(deleted==0){
-           p = prev->next;
+      if(prev->next==NULL){
+           base = prev->next;
            free(prev);
-         }
+          }
                
       /* Matching node found. Delete it from the linked list.
          Deletion from a linked list like this
