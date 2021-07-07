@@ -95,8 +95,7 @@ FILE *open_db_file() {
 void free_entries(entry *p) {
   /* TBD */ free(p);
   printf("Memory is not being freed. This needs to be fixed!\n");  
-  }
-}  
+  } 
   
 
 void print_usage(char *message, char *progname) {
@@ -223,7 +222,6 @@ int delete(FILE *db_file, char *name) {
       */
 
       /* TBD */
-    }
    p=p->next;
   }
   write_all_entries(base);
