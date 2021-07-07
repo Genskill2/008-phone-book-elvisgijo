@@ -30,6 +30,7 @@ entry *create_entry_node(char *, char *);  /* Create a new entry
                                               user. */
 void free_entries(entry *); /* TBD Given the first node of a linked list
                                of entries, will free all the nodes */ 
+void free_entry(entry *);
 
 void write_all_entries(entry *); /* Given the first node of a linked
                                     list of entries, will delete the
@@ -110,7 +111,9 @@ void free_entries(entry *p) {
   /* TBD */ free(p);
   printf(" All heap blocks were freed -- no leaks are possible");
   } 
-  
+void free_entry(entry *p) {
+      free(p);
+}
 
 void print_usage(char *message, char *progname) {
   printf("Error : %s\n", message);
@@ -199,9 +202,9 @@ void list(FILE *db_file) {
     count+=1;
     p=p->next;
   }
-  
+  free_entry(base);
   /* TBD print total count */
-     free(base);
+     
 }
 
 
