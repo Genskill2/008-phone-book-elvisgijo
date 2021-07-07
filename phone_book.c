@@ -200,15 +200,11 @@ void list(FILE *db_file) {
     p=p->next;
   }
   if(count!=0){
-        printf("Total entries :  %d",count);
-        free(*base);
-        free(*p);
-        
+        printf("Total entries :  %d",count);   
      }
-   else {
+  
   /* TBD print total count */
       free_entries(base);
-  }
 }
 
 
