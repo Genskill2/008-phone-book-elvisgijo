@@ -201,8 +201,8 @@ void list(FILE *db_file) {
   }
   if(count!=0){
         printf("Total entries :  %d",count);
-        free(base);
-        free(p);
+        free(*base);
+        free(*p);
         
      }
    else {
@@ -225,12 +225,12 @@ int delete(FILE *db_file, char *name) {
           prev->next = del->next;
           free(del);
           deleted++;
-          exit (0);
+          
          }
       if(prev->next==NULL){
            base = prev->next;
            free(prev);
-           exit(0);
+           
           }
                
       /* Matching node found. Delete it from the linked list.
@@ -253,6 +253,7 @@ int delete(FILE *db_file, char *name) {
   write_all_entries(base);
   free_entries(base);
   return deleted;
+  exit(0);
 }
 
 int search(FILE *db_file ,char *name){
