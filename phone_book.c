@@ -199,12 +199,9 @@ void list(FILE *db_file) {
     count+=1;
     p=p->next;
   }
-  if(count!=0){
-        printf("Total entries :  %d",count);   
-     }
   
   /* TBD print total count */
-      free_entries(base);
+     free(base);
 }
 
 
