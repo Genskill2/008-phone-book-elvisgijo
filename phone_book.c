@@ -93,9 +93,14 @@ FILE *open_db_file() {
 }
   
 void free_entries(entry *p) {
-  /* TBD */
+  /* TBD */if(free(p)){
+       printf("Memory is freed");
+  }
+  else {
   printf("Memory is not being freed. This needs to be fixed!\n");  
-}
+  }
+}  
+  
 
 void print_usage(char *message, char *progname) {
   printf("Error : %s\n", message);
@@ -178,10 +183,13 @@ void add(char *name, char *phone) {
 void list(FILE *db_file) {
   entry *p = load_entries(db_file);
   entry *base = p;
+  int count=0;
   while (p!=NULL) {
     printf("%-20s : %10s\n", p->name, p->phone);
     p=p->next;
+    count++;
   }
+  printf("Total entries : %d\n",count);
   /* TBD print total count */
   free_entries(base);
 }
@@ -195,6 +203,17 @@ int delete(FILE *db_file, char *name) {
   int deleted = 0;
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
+          prev = prev->next;
+          del = prev->next;
+          prev->next = del->next;
+          free(del);
+          deleted++;
+         }
+      if(deleted==0){
+           p = prev->next;
+           free(prev);
+         }
+               
       /* Matching node found. Delete it from the linked list.
          Deletion from a linked list like this
    
@@ -208,6 +227,7 @@ int delete(FILE *db_file, char *name) {
 
       /* TBD */
     }
+   p=p->next;
   }
   write_all_entries(base);
   free_entries(base);
