@@ -212,19 +212,18 @@ int delete(FILE *db_file, char *name) {
   int deleted = 0;
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
-         p->name=prev;
-         prev = prev->next;
+         if(prev==NULL){
+           base = prev->next;
+           free(prev);
+          }
+          prev = prev->next;
           del = prev->next;
           prev->next = del->next;
           free(del);
           deleted++;
           
          }
-      if(prev==NULL){
-           base = prev->next;
-           free(prev);
-           
-          }
+     
                
       /* Matching node found. Delete it from the linked list.
          Deletion from a linked list like this
