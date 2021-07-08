@@ -212,14 +212,15 @@ int delete(FILE *db_file, char *name) {
   int deleted = 0;
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
-          prev = prev->next;
+         p->name=prev;
+         prev = prev->next;
           del = prev->next;
           prev->next = del->next;
           free(del);
           deleted++;
           
          }
-      if(prev->next==NULL){
+      if(prev==NULL){
            base = prev->next;
            free(prev);
            
