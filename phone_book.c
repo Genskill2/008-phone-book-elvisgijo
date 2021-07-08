@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
                  if (result==-1) {
                         printf("no match\n");
                         fclose(fp);
-                         exit(0);
+                         exit(1);
                  }
                    fclose(fp);
              exit(0); 
