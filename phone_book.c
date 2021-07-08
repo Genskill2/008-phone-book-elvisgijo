@@ -245,15 +245,14 @@ int delete(FILE *db_file, char *name) {
   write_all_entries(base);
   free_entries(base);
   return deleted;
-  exit(0);
 }
 
 int search(FILE *db_file ,char *name){
          int find_result=0;
          entry *p = load_entries(db_file);
          entry *base=p;
-         while(!feof(db_file)){
-                    if(!strcmp(p->name,name)==0){
+         while(p!=NULL){
+                    if(strcmp(p->name,name)==0){
                              printf("%s",p->phone);
                              find_result++;
                           }
