@@ -263,5 +263,4 @@ int search(FILE *db_file ,char *name){
                      }
              return find_result;
              free_entries(base);
-             exit(0);
     }
