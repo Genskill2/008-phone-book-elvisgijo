@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
-             if (argc != 2) {
+             if (argc == 2) {
            printf("Couldn't open database file: No such file or directory");
              exit(1);
            }
@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
                  if (result==-1) {
                         printf("no match\n");
                         fclose(fp);
-                         exit(1);
+                         exit(0);
                  }
                    fclose(fp);
              exit(0); 
