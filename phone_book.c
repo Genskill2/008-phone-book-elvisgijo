@@ -107,7 +107,9 @@ FILE *open_db_file() {
 }
   
 void free_entries(entry *p) {
-  /* TBD */ free(p);
+  while(p!=NULL){/* TBD */ 
+        free(p);
+       }
   printf(" All heap blocks were freed -- no leaks are possible");
   } 
 
