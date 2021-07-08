@@ -242,22 +242,21 @@ int delete(FILE *db_file, char *name) {
         base=p;
         deleted++;
         free(del);
-      }else{
+       }
+      else{
         del=p;
         prev->next=p->next;
         p=p->next;
         deleted++;
         free(del);
-      }
-     
-    }else{
+       }
+     }
+    else{
        prev=p;
        p=p->next;
     }
-   
   }
   write_all_entries(base);
   free_entries(base);
   return deleted;
  }
-}
